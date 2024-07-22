@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portifolio/presentation/widgets/expertise_cell.dart';
 
 import '../container/localization.dart';
@@ -88,14 +89,73 @@ class _MyHomePageState extends State<HomePage> {
                             alignment: Alignment.topRight,
                             child: Padding(
                               padding: const EdgeInsets.all(18),
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.menu,
-                                  size: 40,
-                                  color: design.white,
-                                ),
-                                onPressed: () =>
-                                    _scaffoldKey.currentState!.openEndDrawer(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  BlocBuilder<CurrentLocaleCubit, String>(
+                                    builder: (context, locale) {
+                                      return ToggleButtons(
+                                        borderRadius: BorderRadius.circular(20),
+                                        isSelected: [
+                                          locale == 'pt-br',
+                                          locale == 'en',
+                                        ],
+                                        onPressed: (index) {
+                                          if (index == 0) {
+                                            setState(() {
+                                              context
+                                                  .read<CurrentLocaleCubit>()
+                                                  .emit('pt-br');
+                                            });
+                                          } else if (index == 1) {
+                                            setState(() {
+                                              context
+                                                  .read<CurrentLocaleCubit>()
+                                                  .emit('en');
+                                            });
+                                          }
+                                        },
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                            ),
+                                            child: Text(
+                                              'PT-BR',
+                                              style: TextStyle(
+                                                color: locale == 'pt-br'
+                                                    ? design.primary500
+                                                    : design.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16),
+                                            child: Text(
+                                              'EN',
+                                              style: TextStyle(
+                                                color: locale == 'en'
+                                                    ? design.primary500
+                                                    : design.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(width: 35),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.menu,
+                                      size: 40,
+                                      color: design.white,
+                                    ),
+                                    onPressed: () => _scaffoldKey.currentState!
+                                        .openEndDrawer(),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -133,25 +193,22 @@ class _MyHomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 0.1 * screenSize.height),
+
                   Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(
-                        screenSize.width < 800
-                            ? screenSize.width * 0.10
-                            : screenSize.width * 0.03,
-                      ),
-                      child: AutoSizeText(
-                        i18n.expertise,
-                        style: design
-                            .h2()
-                            .copyWith(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 0.05 * screenSize.width,
-                            )
-                            .fontHeight(0.05 * screenSize.width),
-                      ),
+                    child: AutoSizeText(
+                      i18n.expertise,
+                      style: design
+                          .h2()
+                          .copyWith(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 0.05 * screenSize.width,
+                          )
+                          .fontHeight(0.05 * screenSize.width),
                     ),
                   ),
+                  SizedBox(height: 0.1 * screenSize.height),
+
                   Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: 10,
@@ -174,7 +231,7 @@ class _MyHomePageState extends State<HomePage> {
                                 screenSize: screenSize,
                                 color: design.secondary300,
                                 title: "Flutter Dev",
-                                subtitle: "Android, iOS, Web",
+                                subtitle: "Android, iOS",
                                 description: i18n.flutterDevDesc,
                                 icon: Icons.phone_android,
                               ),
@@ -219,69 +276,50 @@ class _MyHomePageState extends State<HomePage> {
                             ],
                           ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(50),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: screenSize.width * 0.4,
-                              child: Text(
-                                i18n.myWork,
-                                style: design
-                                    .h1()
-                                    .copyWith(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 0.06 * screenSize.width,
-                                    )
-                                    .fontHeight(0.05 * screenSize.width),
-                              ),
-                            ),
-                            SizedBox(height: 0.03 * screenSize.width),
-                            SizedBox(
-                              width: screenSize.width * 0.4,
-                              child: AutoSizeText(
-                                i18n.myWorkDesc,
-                                style: design.paragraphS().copyWith(
-                                      fontSize: screenSize.width < 800
-                                          ? 0.035 * screenSize.width
-                                          : 0.02 * screenSize.width,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        width: screenSize.width * 0.45,
-                        height: screenSize.height * 0.75,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('celular-flutter.jpg'),
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  SizedBox(height: 0.1 * screenSize.height),
                   Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(40.0),
-                      child: Text(
-                        i18n.professionalExperience,
-                        style: design
-                            .h1()
-                            .copyWith(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 0.06 * screenSize.width,
-                            )
-                            .fontHeight(0.05 * screenSize.width),
-                      ),
+                    child: Text(
+                      i18n.myWork,
+                      style: design
+                          .h1()
+                          .copyWith(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 0.06 * screenSize.width,
+                          )
+                          .fontHeight(0.05 * screenSize.width),
                     ),
                   ),
+                  SizedBox(height: 0.1 * screenSize.height),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 0.1 * screenSize.width,
+                    ),
+                    child: AutoSizeText(
+                      i18n.myWorkDesc,
+                      style: design.paragraphS().copyWith(
+                            fontSize: screenSize.width < 800
+                                ? 0.035 * screenSize.width
+                                : 0.02 * screenSize.width,
+                          ),
+                    ),
+                  ),
+                  SizedBox(height: 0.1 * screenSize.height),
+
+                  Center(
+                    child: Text(
+                      i18n.professionalExperience,
+                      style: design
+                          .h1()
+                          .copyWith(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 0.06 * screenSize.width,
+                          )
+                          .fontHeight(0.05 * screenSize.width),
+                    ),
+                  ),
+                  SizedBox(height: 0.1 * screenSize.height),
+
                   Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: 0.02 * screenSize.width,
@@ -289,12 +327,10 @@ class _MyHomePageState extends State<HomePage> {
                     ),
                     child: Container(
                       width: screenSize.width * 0.8,
-                      decoration: expanded
-                          ? BoxDecoration(
-                              color: design.primary500,
-                              borderRadius: BorderRadius.circular(10.0),
-                            )
-                          : null,
+                      decoration: BoxDecoration(
+                        color: design.primary500,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -311,122 +347,219 @@ class _MyHomePageState extends State<HomePage> {
                                     ? 0.035 * screenSize.width
                                     : 0.015 * screenSize.width,
                               ),
-                              width: screenSize.width * 0.8,
+                              width: screenSize.width * 0.85,
+                              height: screenSize.width < 800
+                                  ? 0.1 * screenSize.width
+                                  : 0.05 * screenSize.width,
                               decoration: BoxDecoration(
                                 color: design.primary300,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: screenSize.width < 800
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AutoSizeText(
-                                          "Macaw Technology",
-                                          style: design.h3(),
-                                        ),
-                                        SizedBox(
-                                          height: screenSize.width < 800
-                                              ? 0.035 * screenSize.width
-                                              : 0.02 * screenSize.width,
-                                        ),
-                                        AutoSizeText(
-                                          "2023 - 2024",
-                                          style: design.paragraphS().copyWith(
-                                                fontSize: screenSize.width < 800
-                                                    ? 0.035 * screenSize.width
-                                                    : 0.02 * screenSize.width,
-                                              ),
-                                        ),
-                                      ],
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            AutoSizeText(
-                                              "Macaw Technology",
-                                              style: design.h3(),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      AutoSizeText(
+                                        i18n.softwareAnalystAndDeveloper,
+                                        style: design.h3().copyWith(
+                                              fontSize: 0.02 * screenSize.width,
                                             ),
-                                            const SizedBox(width: 20),
-                                            AutoSizeText(
-                                              "2023 - 2024",
-                                              style: design.paragraphS(),
-                                            ),
-                                          ],
-                                        ),
-                                        IconButton(
-                                          icon: const Icon(
-                                            Icons.remove,
-                                            size: 40,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              expanded = !expanded;
-                                            });
-                                          },
-                                        ),
-                                      ],
+                                      ),
+                                      const SizedBox(width: 20),
+                                      AutoSizeText(
+                                        "2024",
+                                        style: design.paragraphS().copyWith(
+                                            fontSize: screenSize.width < 800
+                                                ? 0.02 * screenSize.width
+                                                : 0.02 * screenSize.width),
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.remove,
+                                      size: screenSize.width < 800
+                                          ? 0.02 * screenSize.width
+                                          : 0.02 * screenSize.width,
+                                      color: Colors.white,
                                     ),
+                                    onPressed: () {
+                                      setState(() {
+                                        expanded = !expanded;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           if (expanded) ...[
                             Padding(
-                              padding: EdgeInsets.all(
-                                screenSize.width < 800
-                                    ? 0.025 * screenSize.width
-                                    : 0.02 * screenSize.width,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenSize.width < 800
+                                    ? 0.05 * screenSize.width
+                                    : 0.04 * screenSize.width,
+                                vertical: screenSize.width < 800
+                                    ? 0.03 * screenSize.width
+                                    : 0.025 * screenSize.width,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   AutoSizeText(
-                                    i18n.softwareAnalystAndDeveloper,
+                                    "Macaw Technology",
                                     style: design.h3().copyWith(
                                           fontSize: screenSize.width < 800
-                                              ? 0.035 * screenSize.width
-                                              : 0.02 * screenSize.width,
+                                              ? 0.03 * screenSize.width
+                                              : 0.015 * screenSize.width,
                                         ),
                                   ),
                                   SizedBox(
                                     height: screenSize.width < 800
-                                        ? 0.035 * screenSize.width
+                                        ? 0.025 * screenSize.width
                                         : 0.02 * screenSize.width,
                                   ),
                                   AutoSizeText(
                                     i18n.softwareAnalystAndDeveloperDesc,
                                     style: design.paragraphS().copyWith(
                                           fontSize: screenSize.width < 800
-                                              ? 0.035 * screenSize.width
+                                              ? 0.025 * screenSize.width
+                                              : 0.015 * screenSize.width,
+                                        ),
+                                  ),
+                                  AutoSizeText(
+                                    i18n.analystSkills,
+                                    style: design.labelM().copyWith(
+                                          fontSize: screenSize.width < 800
+                                              ? 0.03 * screenSize.width
+                                              : 0.015 * screenSize.width,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 0.02 * screenSize.width,
+                      horizontal: screenSize.width < 800 ? 40 : 150,
+                    ),
+                    child: Container(
+                      width: screenSize.width * 0.8,
+                      decoration: BoxDecoration(
+                        color: design.primary500,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                expanded = !expanded;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(
+                                screenSize.width < 800
+                                    ? 0.035 * screenSize.width
+                                    : 0.015 * screenSize.width,
+                              ),
+                              height: screenSize.width < 800
+                                  ? 0.1 * screenSize.width
+                                  : 0.05 * screenSize.width,
+                              width: screenSize.width * 0.85,
+                              decoration: BoxDecoration(
+                                color: design.primary300,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      AutoSizeText(
+                                        i18n.mobileDeveloper,
+                                        style: design.h3().copyWith(
+                                            fontSize: screenSize.width < 800
+                                                ? 0.04 * screenSize.width
+                                                : 0.035 * screenSize.width),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      AutoSizeText(
+                                        "2023 - 2024",
+                                        style: design.paragraphS().copyWith(
+                                            fontSize: screenSize.width < 800
+                                                ? 0.02 * screenSize.width
+                                                : 0.02 * screenSize.width),
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.remove,
+                                      size: screenSize.width < 800
+                                          ? 0.02 * screenSize.width
+                                          : 0.02 * screenSize.width,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        expanded = !expanded;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          if (expanded) ...[
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenSize.width < 800
+                                    ? 0.05 * screenSize.width
+                                    : 0.04 * screenSize.width,
+                                vertical: screenSize.width < 800
+                                    ? 0.03 * screenSize.width
+                                    : 0.025 * screenSize.width,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  AutoSizeText(
+                                    "Macaw Technology",
+                                    style: design.h3().copyWith(
+                                          fontSize: screenSize.width < 800
+                                              ? 0.03 * screenSize.width
                                               : 0.015 * screenSize.width,
                                         ),
                                   ),
                                   SizedBox(
                                     height: screenSize.width < 800
-                                        ? 0.035 * screenSize.width
-                                        : 0.02 * screenSize.width,
-                                  ),
-                                  AutoSizeText(
-                                    i18n.mobileDeveloper,
-                                    style: design.h3().copyWith(
-                                          fontSize: screenSize.width < 800
-                                              ? 0.035 * screenSize.width
-                                              : 0.02 * screenSize.width,
-                                        ),
-                                  ),
-                                  SizedBox(
-                                    height: screenSize.width < 800
-                                        ? 0.035 * screenSize.width
+                                        ? 0.025 * screenSize.width
                                         : 0.02 * screenSize.width,
                                   ),
                                   AutoSizeText(
                                     i18n.mobileDeveloperDesc,
                                     style: design.paragraphS().copyWith(
                                           fontSize: screenSize.width < 800
-                                              ? 0.035 * screenSize.width
+                                              ? 0.025 * screenSize.width
+                                              : 0.015 * screenSize.width,
+                                        ),
+                                  ),
+                                  AutoSizeText(
+                                    i18n.mobileDeveloperSkills,
+                                    style: design.labelM().copyWith(
+                                          fontSize: screenSize.width < 800
+                                              ? 0.03 * screenSize.width
                                               : 0.015 * screenSize.width,
                                         ),
                                   ),
@@ -439,6 +572,8 @@ class _MyHomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(height: 80),
+
+                  //todo footer com redes sociais
                 ],
               ),
             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:portifolio/presentation/home_page.dart';
+import 'package:portifolio/presentation/home.dart';
 
 import 'container/localization.dart';
 import 'design_system.dart';
@@ -39,10 +39,6 @@ class _MyAppState extends State<MyApp> {
                 home: const LocalizationContainer(
                   child: HomePage(),
                 ),
-                // supportedLocales: const [
-                //   Locale('en', 'US'),
-                //   Locale('pt', 'BR'),
-                // ],
               );
             },
           );

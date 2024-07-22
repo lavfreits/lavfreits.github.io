@@ -132,7 +132,7 @@ class ExpertiseCell extends StatelessWidget {
                       style: design.paragraphS().copyWith(
                             fontSize: screenSize.width < 800
                                 ? 0.035 * screenSize.width
-                                : 0.02 * screenSize.width,
+                                : 0.015 * screenSize.width,
                           ),
                     ),
                   ),

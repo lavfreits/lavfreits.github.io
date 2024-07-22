@@ -60,7 +60,7 @@ final design = Design(
   labelMedium: const TextStyle(
     fontFamily: 'Poppins',
     fontSize: 20.0,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w600,
     letterSpacing: -0.33,
   ).fontHeight(30.0),
   labelSmall: const TextStyle(
