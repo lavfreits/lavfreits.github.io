@@ -27,7 +27,7 @@ class ExpertiseCell extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xff1b1d24),
+        color: design.terciary500,
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(

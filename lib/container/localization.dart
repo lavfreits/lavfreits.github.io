@@ -87,9 +87,9 @@ class HomeViewI18n extends ViewI18N {
 
   String get myWorkDesc => localize({
         "en":
-            'Developed some hybrid mobile apps using Flutter on projects and companies I have worked on. Also developed some Android apps using Kotlin with Jetpack Compose. Here I\'m showing my personal projects.',
+            'Developed some hybrid mobile apps using Flutter on projects and companies I have worked on. Also developed some Android apps using Kotlin with Jetpack Compose. Here I\'m showing my projects.',
         "pt-br":
-            'Desenvolvi aplicativos híbridos usando Flutter em projetos e empresas com as quais trabalhei e, também, desenvolvi alguns aplicativos Android usando Kotlin com Jetpack Compose. Aqui mostro alguns dos meu projetos pessoais. '
+            'Desenvolvi aplicativos híbridos usando Flutter em projetos e empresas com as quais trabalhei e, também, desenvolvi alguns aplicativos Android usando Kotlin com Jetpack Compose. Aqui mostro alguns dos meu projetos. '
       });
 
   String get professionalExperience => localize({
@@ -150,5 +150,12 @@ class HomeViewI18n extends ViewI18N {
             'Skills: Dart, Flutter, Figma, Kanban (Agile Methodology), REST APIs, WebSockets, Google Maps API, Media Management (Audio, Images, PDFs, Webviews), Jitsi Meet (Video Calls), BLoC, Modular, Unit and Integration Testing, CI/CD Pipelines, GitHub Actions, Fastlane, Git Version Control ',
         "pt-br":
             'Habilidades: Dart, Flutter, Figma, APIs REST, WebSockets, Google Maps API, Gerenciamento de Mídias (Áudio, Imagens, PDFs, Webviews), Jitsi Meet, BLoC, Modular, Testes unitários, CI/CD, Git, GitHub Actions, Fastlane',
+      });
+
+  String get contactMeDesc => localize({
+        "en":
+            'I am always open to new opportunities and connections. \nIf you\'re interested in discussing a project or opportunity, feel free to reach out to me!',
+        "pt-br":
+            "Estou sempre aberta a novas oportunidades e conexões. \nSe você está interessado em discutir um projeto ou oportunidade, sinta-se à vontade para entrar em contato comigo!",
       });
 }

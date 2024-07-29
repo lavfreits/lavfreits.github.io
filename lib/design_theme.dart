@@ -10,7 +10,7 @@ final design = Design(
   secondary500: const Color(0xff1a191d),
   secondary700: const Color(0xff34a752),
   terciary300: const Color(0xffDEDFE3),
-  terciary500: const Color(0xff6A6C72),
+  terciary500: const Color(0xff1b1d24),
   terciary700: const Color(0xff7B7C81),
   white: const Color(0xffFFFFFF),
   black: const Color(0xff000000),
