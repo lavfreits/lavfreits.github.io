@@ -38,6 +38,7 @@ class _BuildLanguageToolState extends State<BuildLanguageTool> {
                 'PT-BR',
                 style: TextStyle(
                   color: locale == 'pt-br' ? design.primary500 : design.white,
+                  fontWeight: locale == 'pt-br' ? FontWeight.w600 : null,
                 ),
               ),
             ),
@@ -47,6 +48,7 @@ class _BuildLanguageToolState extends State<BuildLanguageTool> {
                 'EN',
                 style: TextStyle(
                   color: locale == 'en' ? design.primary500 : design.white,
+                  fontWeight: locale == 'en' ? FontWeight.w600 : null,
                 ),
               ),
             ),
@@ -54,6 +56,5 @@ class _BuildLanguageToolState extends State<BuildLanguageTool> {
         );
       },
     );
-    ;
   }
 }

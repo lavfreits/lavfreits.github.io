@@ -5,7 +5,12 @@ import '../../container/localization.dart';
 import '../../design_system.dart';
 
 class BuildDrawer extends StatelessWidget {
-  const BuildDrawer({super.key});
+  final Function(String) onItemTap;
+
+  const BuildDrawer({
+    super.key,
+    required this.onItemTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,7 @@ class BuildDrawer extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   child: ListTile(
                     title: AutoSizeText(item, style: design.h3()),
+                    onTap: () => onItemTap(item),
                   ),
                 ))
             .toList(),

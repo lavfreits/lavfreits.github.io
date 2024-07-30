@@ -35,7 +35,7 @@ final design = Design(
     letterSpacing: -0.33,
   ).fontHeight(30.0),
   heading4: const TextStyle(
-    fontSize: 24.0, //todo letra de cogigo também
+    fontSize: 24.0,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.33,
   ).fontHeight(24.0),
@@ -70,7 +70,6 @@ final design = Design(
     letterSpacing: -0.33,
   ).fontHeight(24.0),
   paragraphMedium: const TextStyle(
-    ///todo body é pra ser letra de código
     fontFamily: 'Poppins',
     fontSize: 22.0,
     fontWeight: FontWeight.w600,

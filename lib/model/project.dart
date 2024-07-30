@@ -1,7 +1,7 @@
 class Project {
   final String title;
-  final String short_description;
-  final String detailed_description;
+  final String shortDescription;
+  final String detailedDescription;
   final List<String> imageUrl;
   final List<String> technologies;
   final String repoUrl;
@@ -10,8 +10,8 @@ class Project {
   Project({
     this.isWeb = false,
     required this.title,
-    required this.short_description,
-    required this.detailed_description,
+    required this.shortDescription,
+    required this.detailedDescription,
     required this.technologies,
     required this.imageUrl,
     required this.repoUrl,
@@ -21,9 +21,9 @@ class Project {
 List<Project> projects = [
   Project(
     title: "Donut Store",
-    short_description:
+    shortDescription:
         "Um aplicativo Flutter para uma loja de donuts, permitindo explorar produtos e gerenciar favoritos.",
-    detailed_description:
+    detailedDescription:
         "Donut Store UI é um app Flutter para uma loja de donuts com uma interface simples e recursos de gerenciamento de estado usando Provider e Firebase Cloud Firestore para favoritos. Permite explorar e favoritar produtos, adicionar itens ao carrinho e sincronizar dados. Inclui uma página de lista de produtos para futuras adições. Clone, configure o Firebase e execute para testar.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/donut_store_ui/master/home.png",
@@ -36,9 +36,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Amphibians App",
-    short_description:
+    shortDescription:
         "Um aplicativo sobre anfíbios com informações e imagens detalhadas.",
-    detailed_description:
+    detailedDescription:
         "Amphibians App é um aplicativo que fornece informações e imagens de diferentes espécies de anfíbios. Ideal para quem gosta de animais e deseja aprender mais sobre esses seres fascinantes.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/amphibians-app/master/home.png"
@@ -48,9 +48,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Site Flutter Web",
-    short_description:
+    shortDescription:
         "Um site desenvolvido em Flutter que mostra diversos recursos e informações.",
-    detailed_description:
+    detailedDescription:
         "Site Flutter Web é um projeto que demonstra a criação de um site moderno usando Flutter. O site inclui várias páginas e seções que destacam a flexibilidade do Flutter para web.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/site_flutter_web/master/Captura%20de%20tela%201.png",
@@ -68,9 +68,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Portifólio",
-    short_description:
+    shortDescription:
         "Um site moderno feito em Flutter que mostra meus trabalhos e habilidades.",
-    detailed_description:
+    detailedDescription:
         "Este projeto é um site feito em Flutter que exibe diversos recursos e informações sobre meu trabalho como desenvolvedora.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/site_flutter_web/master/Captura%20de%20tela%201.png",
@@ -81,9 +81,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Login",
-    short_description:
+    shortDescription:
         "Um aplicativo que permite aos usuários se autenticar usando e-mail, senha ou Google.",
-    detailed_description:
+    detailedDescription:
         "Login é um aplicativo Flutter que integra Autenticação Firebase para login de usuários, registro e Login com Google. Oferece uma interface simples para autenticação com e-mail e senha ou conta do Google.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/login/master/loging_in_page.png",
@@ -99,9 +99,9 @@ List<Project> projects = [
   ),
   Project(
     title: "TMDB",
-    short_description:
+    shortDescription:
         "Um aplicativo para explorar filmes com informações detalhadas e imagens.",
-    detailed_description:
+    detailedDescription:
         "TMDB é um aplicativo que permite aos usuários explorar e obter informações detalhadas sobre filmes. Inclui imagens, descrições e informações adicionais sobre filmes populares.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/tmdb_movies/master/splash.png",
@@ -118,9 +118,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Flutter tarefas",
-    short_description:
+    shortDescription:
         "Um aplicativo para gerenciar tarefas e acompanhar o progresso.",
-    detailed_description:
+    detailedDescription:
         "Flutter tarefas é um aplicativo simples para gerenciamento de tarefas, ajudando os usuários a acompanhar suas atividades diárias e manter a organização.",
     imageUrl: [
       "https://raw.githubusercontent.com/Kakomo/alura_flutter_curso_1/Aula_2/flutter1_gif.gif",
@@ -131,9 +131,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Rick and Morty App",
-    short_description:
+    shortDescription:
         "Um aplicativo baseado na série Rick and Morty, mostrando personagens e episódios.",
-    detailed_description:
+    detailedDescription:
         "Rick and Morty App é um aplicativo dedicado aos fãs da série Rick and Morty. Ele exibe informações sobre personagens e episódios da série, oferecendo uma maneira divertida de explorar o universo do show.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/rick_morty_app/master/home.png",
@@ -149,9 +149,9 @@ List<Project> projects = [
   ),
   Project(
     title: "Bluromatic App",
-    short_description:
+    shortDescription:
         "Um aplicativo Android para aplicar efeitos de desfoque em imagens.",
-    detailed_description:
+    detailedDescription:
         "Bluromatic é um aplicativo Android que permite aplicar diferentes níveis de desfoque em imagens. Ideal para quem deseja experimentar efeitos visuais e aprender sobre manipulação de imagens.",
     imageUrl: [
       "https://raw.githubusercontent.com/lavfreits/kotlin-compose-workmanager/master/home.png",

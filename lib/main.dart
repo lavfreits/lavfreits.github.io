@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
                   primaryColor: design.primary300,
                   textTheme: GoogleFonts.poppinsTextTheme().apply(
                     bodyColor: design.white,
+                    displayColor: design.white,
                     fontFamily: design.fontFamily,
                   ),
                 ),

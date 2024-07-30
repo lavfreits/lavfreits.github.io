@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../design_system.dart';
 import '../../model/project.dart';
+import '../../utils.dart';
 
 class ProjectCardList extends StatelessWidget {
   final Project project;
@@ -18,11 +19,11 @@ class ProjectCardList extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return SizedBox(
-      width: project.isWeb
-          ? 0.45 * screenSize.width
+      width: screenSize.width < 400 || project.isWeb
+          ? 0.85 * screenSize.width
           : screenSize.width > 850
-              ? 0.20 * screenSize.width
-              : 0.42 * screenSize.width,
+              ? 0.2 * screenSize.width
+              : 0.45 * screenSize.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,7 @@ class ProjectCardList extends StatelessWidget {
                 : 0.05 * screenSize.height,
           ),
           Text(
-            project.short_description,
+            project.shortDescription,
             style: design.paragraphS().copyWith(
                   fontSize: screenSize.width > 800 ? 16 : 14,
                 ),
@@ -58,8 +59,8 @@ class ProjectCardList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton.icon(
-                icon: const Icon(
-                  Icons.code,
+                icon: const FaIcon(
+                  FontAwesomeIcons.code,
                 ),
                 onPressed: () {
                   launchURL(project.repoUrl);
@@ -77,13 +78,5 @@ class ProjectCardList extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-void launchURL(String url) async {
-  if (await canLaunchUrlString(url)) {
-    await launchUrlString(url);
-  } else {
-    throw 'Não foi possível abrir a URL: $url';
   }
 }

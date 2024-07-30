@@ -5,10 +5,10 @@ class DesignSystem extends InheritedWidget {
   final Design playBankDesign;
 
   const DesignSystem({
-    Key? key,
+    super.key,
     required this.playBankDesign,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   static Design of(BuildContext context) {
     final layerDesign = context
@@ -199,7 +199,7 @@ class Design {
       fontWeight: style.fontWeight,
       height: style.height,
       letterSpacing: style.letterSpacing,
-      color: color ?? Colors.white, //todo a pegando null??? pq?
+      color: color ?? Colors.white,
     );
   }
 

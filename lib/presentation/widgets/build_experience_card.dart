@@ -75,21 +75,19 @@ class BuildExperienceCard extends StatelessWidget {
                               ),
                         ),
                         const SizedBox(width: 20),
-                        AutoSizeText(
-                          date,
-                          style: design.paragraphS().copyWith(
-                                fontSize: getFontSize(0.02),
-                              ),
-                        ),
+                        if (screenSize.width > 550)
+                          AutoSizeText(
+                            date,
+                            style: design.paragraphS().copyWith(
+                                  fontSize: getFontSize(0.02),
+                                ),
+                          ),
                       ],
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.remove,
-                        size: getFontSize(0.013),
-                        color: Colors.white,
-                      ),
-                      onPressed: () => onTap(),
+                    Icon(
+                      Icons.remove,
+                      size: getFontSize(0.013),
+                      color: Colors.white,
                     ),
                   ],
                 ),
@@ -108,13 +106,25 @@ class BuildExperienceCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    AutoSizeText(
-                      "Macaw Technology",
-                      style: design.h3().copyWith(
-                            fontSize: getFontSize(
-                              screenSize.width < 800 ? 0.03 : 0.015,
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AutoSizeText(
+                          "Macaw Technology",
+                          style: design.h3().copyWith(
+                                fontSize: getFontSize(
+                                  screenSize.width < 800 ? 0.03 : 0.015,
+                                ),
+                              ),
+                        ),
+                        if (screenSize.width < 550)
+                          AutoSizeText(
+                            date,
+                            style: design.paragraphS().copyWith(
+                                  fontSize: getFontSize(0.02),
+                                ),
                           ),
+                      ],
                     ),
                     SizedBox(
                       height: getFontSize(

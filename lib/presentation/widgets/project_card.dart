@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portifolio/presentation/widgets/project_card_list.dart';
 
 import '../../design_system.dart';
 import '../../model/project.dart';
+import '../../utils.dart';
+import 'dialog_content_column.dart';
+import 'dialog_content_row.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -20,39 +24,50 @@ class ProjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(project.title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.network(
-                      project.imageUrl[0],
-                      width: 300,
-                    ),
-                    SizedBox(height: 0.04 * screenSize.height),
-                    Text(
-                      project.detailed_description,
-                      style: design.paragraphS(),
-                    ),
-                    SizedBox(height: 0.04 * screenSize.height),
-                    Text(
-                      project.technologies.join(", "),
-                      style: design.paragraphS(),
-                    ),
-                  ],
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Fechar'),
+          context: context,
+          builder: (_) {
+            return AlertDialog(
+              titlePadding: const EdgeInsets.all(22),
+              scrollable: true,
+              backgroundColor: design.terciary500,
+              title: Text(project.title, style: design.h3()),
+              content: project.isWeb
+                  ? DialogContentColumn(project: project)
+                  : screenSize.width < 850
+                      ? DialogContentColumn(project: project)
+                      : DialogContentRow(project: project),
+              actions: [
+                TextButton.icon(
+                  icon: const FaIcon(
+                    FontAwesomeIcons.code,
                   ),
-                ],
-              );
-            });
+                  onPressed: () {
+                    launchURL(project.repoUrl);
+                  },
+                  label: const Text(
+                    'Ver Código',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    'Fechar',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       },
       child: Card(
         color: design.terciary500,
@@ -84,9 +99,11 @@ class ProjectCard extends StatelessWidget {
                   children: [
                     Image.network(
                       project.imageUrl[0],
-                      height: 0.2 * screenSize.width,
+                      height: screenSize.width > 850 && project.isWeb
+                          ? 0.13 * screenSize.width
+                          : 0.3 * screenSize.width,
                     ),
-                    SizedBox(height: 0.01 * screenSize.width),
+                    SizedBox(height: 0.02 * screenSize.height),
                     ProjectCardList(project: project),
                   ],
                 ),
