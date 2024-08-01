@@ -24,8 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final List<GlobalKey> _keys = List.generate(4, (index) => GlobalKey());
-
   bool developerExpanded = false;
   bool analystExpanded = false;
 
@@ -38,16 +36,16 @@ class _HomePageState extends State<HomePage> {
   void scrollToSection(String section) {
     switch (section) {
       case "expertise" || "especialidade":
-        scrollTo(0);
+        scrollTo(28);
         break;
       case "work" || "trabalho":
-        scrollTo(1);
+        scrollTo(39);
         break;
       case "experience" || "experiência":
-        scrollTo(2);
+        scrollTo(99);
         break;
       case "contact" || "contato":
-        scrollTo(3);
+        scrollTo(120);
         break;
     }
   }
@@ -55,28 +53,16 @@ class _HomePageState extends State<HomePage> {
   final ScrollController scrollController = ScrollController();
 
   void scrollTo(int index) {
-    // final keyContext = _keys[index].currentContext;
-    //
-    // if (keyContext != null) {
-    //   scrollController.position.ensureVisible(
-    //     key,
-    //     duration: const Duration(seconds: 1),
-    //   );
-    //   Scrollable.ensureVisible(
-    //     keyContext,
-    //     duration: const Duration(seconds: 1),
-    //   );
-    // }
+    const double h = 50.0;
+    final double sh = MediaQuery.of(context).size.height;
+    final double middlePosition = (sh / 2) - (h / 2);
 
-    // final box = keyContext.findRenderObject() as RenderBox;
-    // final position =
-    //     box.localToGlobal(Offset.zero, ancestor: context.findRenderObject());
-    //
-    // _scrollController.animateTo(
-    //   position.dy + _scrollController.offset,
-    //   duration: const Duration(seconds: 1),
-    //   curve: Curves.easeInOut,
-    // );
+    final double position = (index * h) - middlePosition;
+    scrollController.animateTo(
+      position,
+      duration: const Duration(seconds: 1),
+      curve: Curves.linear,
+    );
   }
 
   @override
@@ -145,7 +131,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: screenSize.height * 0.1),
                   SectionTitle(
-                    key: _keys[0],
                     screenSize: screenSize,
                     title: i18n.expertise,
                     style: design.h2(),
@@ -165,7 +150,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: screenSize.height * 0.1),
                   SectionTitle(
-                    key: _keys[1],
                     screenSize: screenSize,
                     title: i18n.myWork,
                     style: design.h1(),
@@ -187,19 +171,22 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 0.1 * screenSize.height),
                   GridView(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 0.05 * screenSize.width,
+                      horizontal: screenSize.width > 1100
+                          ? 0.1 * screenSize.width
+                          : 0.05 * screenSize.width,
                     ),
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: screenSize.width < 850 ? 1 : 2,
                       mainAxisSpacing: 30,
                       crossAxisSpacing: 30,
-                      childAspectRatio:
-                          screenSize.width < 500 || screenSize.width > 1030
+                      childAspectRatio: screenSize.width < 850
+                          ? screenSize.width < 500
                               ? 1.1
-                              : screenSize.width < 850
-                                  ? 1.2
-                                  : 0.8,
+                              : 1.2
+                          : screenSize.width > 1030
+                              ? 1
+                              : 0.8,
                     ),
                     children: projects
                         .map((project) => ProjectCard(project: project))
@@ -207,7 +194,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 0.1 * screenSize.height),
                   SectionTitle(
-                    key: _keys[2],
                     screenSize: screenSize,
                     title: i18n.professionalExperience,
                     style: design.h1(),
@@ -234,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: screenSize.height * 0.1),
-                  ContactSection(key: _keys[3]),
+                  const ContactSection(),
                 ],
               ),
             ],

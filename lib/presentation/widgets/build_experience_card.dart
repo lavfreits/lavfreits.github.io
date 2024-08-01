@@ -32,7 +32,11 @@ class BuildExperienceCard extends StatelessWidget {
         EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);
 
     return Padding(
-      padding: getPadding(0.1 * screenSize.width, 0.02 * screenSize.width),
+      padding: getPadding(
+          screenSize.width > 1100
+              ? 0.2 * screenSize.width
+              : 0.1 * screenSize.width,
+          0.02 * screenSize.width),
       child: Container(
         width: screenSize.width * 0.8,
         decoration: BoxDecoration(

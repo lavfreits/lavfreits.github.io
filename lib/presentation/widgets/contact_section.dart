@@ -20,14 +20,16 @@ class ContactSection extends StatelessWidget {
       key: key,
       children: [
         Container(
-          height: screenSize.width < 900
-              ? 0.8 * screenSize.height
-              : 0.6 * screenSize.height,
+          height: screenSize.width < 600
+              ? 0.45 * screenSize.height
+              : 0.52 * screenSize.height,
           color: design.terciary500,
         ),
         Padding(
           padding: getPadding(
-            0.2 * screenSize.width,
+            screenSize.width > 1100
+                ? 0.2 * screenSize.width
+                : 0.09 * screenSize.width,
             0.05 * screenSize.width,
           ),
           child: Column(
@@ -36,13 +38,16 @@ class ContactSection extends StatelessWidget {
               AutoSizeText(
                 i18n.contactMeDesc,
                 style: design.h3().copyWith(
-                      fontSize: screenSize.width > 900
+                      fontSize: screenSize.width > 1200
                           ? 0.02 * screenSize.width
-                          : 0.035 * screenSize.width,
+                          : 0.028 * screenSize.width,
                       height: 1.7,
                     ),
               ),
-              SizedBox(height: 0.05 * screenSize.height),
+              SizedBox(
+                  height: screenSize.width > 900
+                      ? 0.1 * screenSize.height
+                      : 0.05 * screenSize.height),
               screenSize.width < 900
                   ? Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
