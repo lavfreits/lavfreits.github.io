@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../container/localization.dart';
+import '../../container/bloc_container.dart';
 import '../../design_system.dart';
+import '../../model/localization.dart';
 
 class BuildLanguageTool extends StatefulWidget {
   final void Function(String) onTap;
+  final Localization i18n;
 
   const BuildLanguageTool({
     super.key,
     required this.onTap,
+    required this.i18n,
   });
 
   @override

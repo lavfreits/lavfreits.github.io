@@ -1,19 +1,25 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portifolio/container/localization.dart';
+import 'package:portifolio/model/localization.dart';
 
 import '../../design_system.dart';
 import '../../utils.dart';
 
 class ContactSection extends StatelessWidget {
-  const ContactSection({super.key});
+  final Localization i18n;
+  final String locale;
+
+  const ContactSection({
+    super.key,
+    required this.i18n,
+    required this.locale,
+  });
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final design = DesignSystem.of(context);
-    final i18n = HomeViewI18n(context);
 
     return Stack(
       alignment: Alignment.bottomCenter,
@@ -53,6 +59,21 @@ class ContactSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        TextButton.icon(
+                          icon: FaIcon(
+                            FontAwesomeIcons.solidFileLines,
+                            color: design.white,
+                          ),
+                          onPressed: () {
+                            launchURL(
+                                "https://docs.google.com/document/d/11dns9jkwr_1IzTt7nw-35F6trrQoT7L25ZeVnac6uqo/edit?usp=sharing");
+                          },
+                          label: Text(
+                            locale == 'pt-br' ? 'Currículo' : 'Resume/CV',
+                            style: design.paragraphS(),
+                          ),
+                        ),
+                        SizedBox(height: 0.015 * screenSize.height),
                         TextButton.icon(
                           icon: Icon(
                             Icons.email,
@@ -101,6 +122,20 @@ class ContactSection extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TextButton.icon(
+                          icon: FaIcon(
+                            FontAwesomeIcons.solidFileLines,
+                            color: design.white,
+                          ),
+                          onPressed: () {
+                            launchURL(
+                                "https://docs.google.com/document/d/11dns9jkwr_1IzTt7nw-35F6trrQoT7L25ZeVnac6uqo/edit?usp=sharing");
+                          },
+                          label: Text(
+                            locale == 'pt-br' ? 'Currículo' : 'Resume',
+                            style: design.paragraphS(),
+                          ),
+                        ),
+                        TextButton.icon(
                           icon: Icon(
                             Icons.email,
                             color: design.white,
@@ -141,7 +176,7 @@ class ContactSection extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
             ],
           ),
         ),

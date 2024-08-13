@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portifolio/presentation/home.dart';
 
-import 'container/localization.dart';
+import 'container/bloc_container.dart';
 import 'design_system.dart';
 import 'design_theme.dart';
 
@@ -22,28 +22,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return DesignSystem(
       playBankDesign: design,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return OrientationBuilder(
-            builder: (context, orientation) {
-              return MaterialApp(
-                title: 'portifolio',
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  primaryColor: design.primary300,
-                  textTheme: GoogleFonts.poppinsTextTheme().apply(
-                    bodyColor: design.white,
-                    displayColor: design.white,
-                    fontFamily: design.fontFamily,
-                  ),
-                ),
-                home: const LocalizationContainer(
-                  child: HomePage(),
-                ),
-              );
-            },
-          );
-        },
+      child: MaterialApp(
+        title: 'portifolio',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primaryColor: design.primary300,
+          textTheme: GoogleFonts.poppinsTextTheme().apply(
+            bodyColor: design.white,
+            displayColor: design.white,
+            fontFamily: design.fontFamily,
+          ),
+        ),
+        home: const LocalizationContainer(
+          child: HomePage(),
+        ),
       ),
     );
   }

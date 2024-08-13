@@ -7,10 +7,12 @@ import '../../utils.dart';
 
 class ProjectCardList extends StatelessWidget {
   final Project project;
+  final String locale;
 
   const ProjectCardList({
     super.key,
     required this.project,
+    required this.locale,
   });
 
   @override
@@ -80,10 +82,10 @@ class ProjectCardList extends StatelessWidget {
                 onPressed: () {
                   launchURL(project.repoUrl);
                 },
-                label: const Text(
-                  'Ver Código',
+                label: Text(
+                  locale == "en" ? 'View Code' : 'Ver Código',
                   softWrap: true,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),

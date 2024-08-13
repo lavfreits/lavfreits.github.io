@@ -19,12 +19,12 @@ class Project {
 
   factory Project.fromJson(Map<String, dynamic> json, String localization) =>
       Project(
-        title: json['title'][localization],
-        shortDescription: json['shortDescription'][localization],
-        detailedDescription: json['detailedDescription'][localization],
-        imageUrl: json['imageUrl'],
-        technologies: List<String>.from(json['technologies']),
-        repoUrl: json['repoUrl'],
+        title: json['title'][localization] ?? '',
+        shortDescription: json['shortDescription'][localization] ?? '',
+        detailedDescription: json['detailedDescription'][localization] ?? '',
+        imageUrl: json['imageUrl'] ?? '',
+        technologies: List<String>.from(json['technologies'] ?? []),
+        repoUrl: json['repoUrl'] ?? '',
         isWeb: json['isWeb'] ?? false,
       );
 }

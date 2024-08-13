@@ -10,10 +10,12 @@ import 'dialog_content_row.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
+  final String locale;
 
   const ProjectCard({
     required this.project,
     super.key,
+    required this.locale,
   });
 
   @override
@@ -91,7 +93,10 @@ class ProjectCard extends StatelessWidget {
                         width: screenSize.width > 850
                             ? 0.025 * screenSize.height
                             : 0.03 * screenSize.height),
-                    ProjectCardList(project: project),
+                    ProjectCardList(
+                      project: project,
+                      locale: locale,
+                    ),
                   ],
                 )
               : Column(
@@ -104,7 +109,10 @@ class ProjectCard extends StatelessWidget {
                           : 0.3 * screenSize.width,
                     ),
                     SizedBox(height: 0.02 * screenSize.height),
-                    ProjectCardList(project: project),
+                    ProjectCardList(
+                      project: project,
+                      locale: locale,
+                    ),
                   ],
                 ),
         ),

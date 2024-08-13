@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../container/localization.dart';
 import '../../design_system.dart';
+import '../../model/localization.dart';
 import '../../utils.dart';
 import 'build_language_tool.dart';
 
@@ -13,7 +13,7 @@ class HeaderSection extends StatelessWidget {
     required this.onChangeLanguage,
   });
 
-  final HomeViewI18n i18n;
+  final Localization i18n;
   final Function(String) onChangeLanguage;
 
   @override
@@ -60,6 +60,7 @@ class HeaderSection extends StatelessWidget {
                   children: [
                     BuildLanguageTool(
                       onTap: onChangeLanguage,
+                      i18n: i18n,
                     ),
                     const SizedBox(width: 35),
                     IconButton(
