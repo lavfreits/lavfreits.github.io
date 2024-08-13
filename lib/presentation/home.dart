@@ -1,17 +1,21 @@
+import 'dart:math' as math;
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portifolio/presentation/widgets/contact_section.dart';
-import 'package:portifolio/presentation/widgets/expertise_cell.dart';
-import 'package:portifolio/presentation/widgets/project_card.dart';
-import 'package:portifolio/utils.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../container/localization.dart';
 import '../design_system.dart';
 import '../model/project.dart';
+import '../service/project_service.dart';
+import '../utils.dart';
 import 'widgets/build_drawer.dart';
 import 'widgets/build_experience_card.dart';
+import 'widgets/contact_section.dart';
+import 'widgets/expertise_cell.dart';
 import 'widgets/header_section.dart';
+import 'widgets/project_card.dart';
 import 'widgets/section_title.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,39 +33,51 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    scrollController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   void scrollToSection(String section) {
     switch (section) {
       case "expertise" || "especialidade":
-        scrollTo(28);
+        scrollTo(1);
         break;
       case "work" || "trabalho":
-        scrollTo(39);
+        scrollTo(2);
         break;
       case "experience" || "experiência":
-        scrollTo(99);
+        scrollTo(3);
         break;
       case "contact" || "contato":
-        scrollTo(120);
+        scrollTo(4);
         break;
     }
   }
 
-  final ScrollController scrollController = ScrollController();
+  void scrollTo(int index) async {
+    await controller.scrollToIndex(
+      index,
+      preferPosition: AutoScrollPosition.begin,
+    );
+    controller.highlight(index);
+  }
 
-  void scrollTo(int index) {
-    const double h = 50.0;
-    final double sh = MediaQuery.of(context).size.height;
-    final double middlePosition = (sh / 2) - (h / 2);
+  late AutoScrollController controller;
+  final random = math.Random();
 
-    final double position = (index * h) - middlePosition;
-    scrollController.animateTo(
-      position,
-      duration: const Duration(seconds: 1),
-      curve: Curves.linear,
+  late Future<List<Project>> _projectsFuture;
+  final _localizationService = LocalizationService();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _projectsFuture = _localizationService.fetchLocalizationData("pt");
+
+    controller = AutoScrollController(
+      viewportBoundaryGetter: () =>
+          Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: Axis.vertical,
     );
   }
 
@@ -69,7 +85,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final design = DesignSystem.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final i18n = HomeViewI18n(context);
 
     List<Widget> expertiseList = [
       ExpertiseCell(
@@ -115,7 +130,8 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           body: CustomScrollView(
-            controller: scrollController,
+            controller: controller,
+            shrinkWrap: true,
             slivers: [
               SliverList.list(
                 children: [
@@ -124,16 +140,20 @@ class _HomePageState extends State<HomePage> {
                     onChangeLanguage: (String locale) {
                       setState(
                         () {
-                          context.read<CurrentLocaleCubit>().emit(locale);
+                          _projectsFuture = _localizationService
+                              .fetchLocalizationData(locale);
                         },
                       );
                     },
                   ),
                   SizedBox(height: screenSize.height * 0.1),
-                  SectionTitle(
-                    screenSize: screenSize,
-                    title: i18n.expertise,
-                    style: design.h2(),
+                  _wrapScrollTag(
+                    child: SectionTitle(
+                      screenSize: screenSize,
+                      title: i18n.expertise,
+                      style: design.h2(),
+                    ),
+                    index: 1,
                   ),
                   SizedBox(height: screenSize.height * 0.1),
                   Padding(
@@ -149,10 +169,13 @@ class _HomePageState extends State<HomePage> {
                           ),
                   ),
                   SizedBox(height: screenSize.height * 0.1),
-                  SectionTitle(
-                    screenSize: screenSize,
-                    title: i18n.myWork,
-                    style: design.h1(),
+                  _wrapScrollTag(
+                    index: 2,
+                    child: SectionTitle(
+                      screenSize: screenSize,
+                      title: i18n.myWork,
+                      style: design.h1(),
+                    ),
                   ),
                   SizedBox(height: 0.1 * screenSize.height),
                   Padding(
@@ -169,34 +192,57 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: 0.1 * screenSize.height),
-                  GridView(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: screenSize.width > 1100
-                          ? 0.1 * screenSize.width
-                          : 0.05 * screenSize.width,
-                    ),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: screenSize.width < 850 ? 1 : 2,
-                      mainAxisSpacing: 30,
-                      crossAxisSpacing: 30,
-                      childAspectRatio: screenSize.width < 850
-                          ? screenSize.width < 500
-                              ? 1.1
-                              : 1.2
-                          : screenSize.width > 1030
-                              ? 1
-                              : 0.8,
-                    ),
-                    children: projects
-                        .map((project) => ProjectCard(project: project))
-                        .toList(),
+                  FutureBuilder<List<Project>>(
+                    future: _projectsFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Error: ${snapshot.error}'),
+                        );
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return const Center(
+                          child: Text('No projects available'),
+                        );
+                      } else {
+                        return GridView(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: screenSize.width > 1100
+                                ? 0.1 * screenSize.width
+                                : 0.05 * screenSize.width,
+                          ),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: screenSize.width < 850 ? 1 : 2,
+                            mainAxisSpacing: 30,
+                            crossAxisSpacing: 30,
+                            childAspectRatio: screenSize.width < 850
+                                ? screenSize.width < 500
+                                    ? 1.1
+                                    : 1.2
+                                : screenSize.width > 1030
+                                    ? 1
+                                    : 0.8,
+                          ),
+                          children: snapshot.data!
+                              .map((project) => ProjectCard(project: project))
+                              .toList(),
+                        );
+                      }
+                    },
                   ),
                   SizedBox(height: 0.1 * screenSize.height),
-                  SectionTitle(
-                    screenSize: screenSize,
-                    title: i18n.professionalExperience,
-                    style: design.h1(),
+                  _wrapScrollTag(
+                    index: 3,
+                    child: SectionTitle(
+                      screenSize: screenSize,
+                      title: i18n.professionalExperience,
+                      style: design.h1(),
+                    ),
                   ),
                   SizedBox(height: 0.1 * screenSize.height),
                   BuildExperienceCard(
@@ -220,7 +266,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(height: screenSize.height * 0.1),
-                  const ContactSection(),
+                  _wrapScrollTag(
+                    index: 4,
+                    child: const ContactSection(),
+                  ),
                 ],
               ),
             ],
@@ -229,4 +278,15 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+
+  Widget _wrapScrollTag({
+    required int index,
+    required Widget child,
+  }) =>
+      AutoScrollTag(
+        key: ValueKey(index),
+        controller: controller,
+        index: index,
+        child: child,
+      );
 }

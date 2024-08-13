@@ -9,16 +9,5 @@ void launchURL(String url) async {
   }
 }
 
-void scrollToSection(GlobalKey key) {
-  final context = key.currentContext;
-  if (context != null) {
-    Scrollable.ensureVisible(
-      context,
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInOut,
-    );
-  }
-}
-
 EdgeInsets getPadding(double horizontal, double vertical) =>
     EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical);

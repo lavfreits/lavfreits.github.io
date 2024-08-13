@@ -199,7 +199,7 @@ class Design {
       fontWeight: style.fontWeight,
       height: style.height,
       letterSpacing: style.letterSpacing,
-      color: color ?? Colors.white,
+      color: color ?? white,
     );
   }
 

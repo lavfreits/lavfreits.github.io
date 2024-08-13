@@ -82,7 +82,7 @@ class ProjectCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.network(
-                      project.imageUrl[0],
+                      project.imageUrl,
                       width: screenSize.width > 850
                           ? 0.15 * screenSize.width
                           : 0.3 * screenSize.width,
@@ -98,7 +98,7 @@ class ProjectCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Image.network(
-                      project.imageUrl[0],
+                      project.imageUrl,
                       height: screenSize.width > 850 && project.isWeb
                           ? 0.13 * screenSize.width
                           : 0.3 * screenSize.width,
