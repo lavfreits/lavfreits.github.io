@@ -19,7 +19,7 @@ class DialogContentColumn extends StatelessWidget {
     return Column(
       children: [
         Image.network(
-          project.imageUrl[0],
+          project.imageUrl,
           width: screenSize.width < 600 && project.isWeb
               ? 0.8 * screenSize.width
               : 0.4 * screenSize.width,

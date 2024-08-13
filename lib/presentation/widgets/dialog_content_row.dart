@@ -16,7 +16,7 @@ class DialogContentRow extends StatelessWidget {
     return Row(
       children: [
         Image.network(
-          project.imageUrl[0],
+          project.imageUrl,
           height: screenSize.width > 800 ? 0.8 * screenSize.height : null,
           width: screenSize.width > 800 ? null : 0.9 * screenSize.width,
         ),
