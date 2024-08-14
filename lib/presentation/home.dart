@@ -215,6 +215,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: AutoSizeText(
                           i18n.myWorkDesc,
+                          minFontSize: 10,
+                          maxFontSize: 30,
                           style: design.paragraphS().copyWith(
                                 fontSize: screenSize.width < 800
                                     ? 0.035 * screenSize.width
@@ -230,6 +232,7 @@ class _HomePageState extends State<HomePage> {
                               : 0.05 * screenSize.width,
                         ),
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: screenSize.width < 850 ? 1 : 2,
                           mainAxisSpacing: 30,

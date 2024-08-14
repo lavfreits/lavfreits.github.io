@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portifolio/presentation/widgets/project_card_list.dart';
@@ -32,7 +33,11 @@ class ProjectCard extends StatelessWidget {
               titlePadding: const EdgeInsets.all(22),
               scrollable: true,
               backgroundColor: design.terciary500,
-              title: Text(project.title, style: design.h3()),
+              title: AutoSizeText(
+                project.title,
+                maxFontSize: 40,
+                style: design.h3(),
+              ),
               content: project.isWeb
                   ? DialogContentColumn(project: project)
                   : screenSize.width < 850
@@ -42,6 +47,7 @@ class ProjectCard extends StatelessWidget {
                 TextButton.icon(
                   icon: const FaIcon(
                     FontAwesomeIcons.code,
+                    size: 16,
                   ),
                   onPressed: () {
                     launchURL(project.repoUrl);
@@ -50,7 +56,7 @@ class ProjectCard extends StatelessWidget {
                     'Ver Código',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -62,7 +68,7 @@ class ProjectCard extends StatelessWidget {
                     'Fechar',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 16,
                     ),
                   ),
                 ),

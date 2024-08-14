@@ -43,9 +43,10 @@ class ContactSection extends StatelessWidget {
             children: [
               AutoSizeText(
                 i18n.contactMeDesc,
+                maxFontSize: 40,
                 style: design.h3().copyWith(
                       fontSize: screenSize.width > 1200
-                          ? 0.02 * screenSize.width
+                          ? 0.018 * screenSize.width
                           : 0.028 * screenSize.width,
                       height: 1.7,
                     ),

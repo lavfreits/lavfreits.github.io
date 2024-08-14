@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -33,9 +34,10 @@ class ProjectCardList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          AutoSizeText(
             project.title,
             softWrap: true,
+            maxFontSize: 30,
             style: design.h3().copyWith(
                   fontSize:
                       screenSize.width > 850 ? 0.027 * screenSize.width : 24,
@@ -56,9 +58,10 @@ class ProjectCardList extends StatelessWidget {
                 ),
           ),
           SizedBox(
-              height: screenSize.width > 800
-                  ? 0.02 * screenSize.height
-                  : 0.01 * screenSize.height),
+            height: screenSize.width > 800
+                ? 0.02 * screenSize.height
+                : 0.01 * screenSize.height,
+          ),
           Text(
             project.technologies.join(", "),
             softWrap: true,
@@ -67,9 +70,10 @@ class ProjectCardList extends StatelessWidget {
                 ),
           ),
           SizedBox(
-              height: screenSize.width > 800
-                  ? 0.02 * screenSize.height
-                  : 0.01 * screenSize.height),
+            height: screenSize.width > 800
+                ? 0.02 * screenSize.height
+                : 0.01 * screenSize.height,
+          ),
           Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.end,

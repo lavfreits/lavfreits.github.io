@@ -18,6 +18,7 @@ class SectionTitle extends StatelessWidget {
     return Center(
       child: AutoSizeText(
         title,
+        maxFontSize: 60,
         style: style.copyWith(
           fontWeight: FontWeight.normal,
           fontSize: getFontSize(

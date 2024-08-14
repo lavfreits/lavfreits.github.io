@@ -73,6 +73,7 @@ class ExpertiseCell extends StatelessWidget {
                       ),
                       child: AutoSizeText(
                         title,
+                        maxFontSize: 35,
                         style: design
                             .h3()
                             .copyWith(
@@ -90,6 +91,7 @@ class ExpertiseCell extends StatelessWidget {
                           : screenSize.width * 0.15,
                       child: AutoSizeText(
                         subtitle,
+                        maxFontSize: 35,
                         style: design.h3().copyWith(
                               fontSize: screenSize.width < 800
                                   ? 0.035 * screenSize.width
@@ -128,7 +130,7 @@ class ExpertiseCell extends StatelessWidget {
                         : screenSize.width * 0.18,
                     child: AutoSizeText(
                       "\"$description\"",
-                      // textAlign: TextAlign.center,
+                      maxFontSize: 30,
                       style: design.paragraphS().copyWith(
                             fontSize: screenSize.width < 800
                                 ? 0.035 * screenSize.width

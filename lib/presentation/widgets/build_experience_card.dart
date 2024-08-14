@@ -73,6 +73,7 @@ class BuildExperienceCard extends StatelessWidget {
                       children: [
                         AutoSizeText(
                           title,
+                          maxFontSize: 35,
                           style: design.h3().copyWith(
                                 fontSize: getFontSize(
                                     screenSize.width < 800 ? 0.04 : 0.035),
@@ -82,6 +83,7 @@ class BuildExperienceCard extends StatelessWidget {
                         if (screenSize.width > 550)
                           AutoSizeText(
                             date,
+                            maxFontSize: 25,
                             style: design.paragraphS().copyWith(
                                   fontSize: getFontSize(0.02),
                                 ),
@@ -115,6 +117,7 @@ class BuildExperienceCard extends StatelessWidget {
                       children: [
                         AutoSizeText(
                           "Macaw Technology",
+                          maxFontSize: 30,
                           style: design.h3().copyWith(
                                 fontSize: getFontSize(
                                   screenSize.width < 800 ? 0.03 : 0.015,
@@ -124,6 +127,7 @@ class BuildExperienceCard extends StatelessWidget {
                         if (screenSize.width < 550)
                           AutoSizeText(
                             date,
+                            maxFontSize: 25,
                             style: design.paragraphS().copyWith(
                                   fontSize: getFontSize(0.02),
                                 ),
@@ -137,6 +141,8 @@ class BuildExperienceCard extends StatelessWidget {
                     ),
                     AutoSizeText(
                       description,
+                      maxFontSize: 30,
+                      minFontSize: 10,
                       style: design.paragraphS().copyWith(
                             fontSize: getFontSize(
                               screenSize.width < 800 ? 0.025 : 0.015,
@@ -145,6 +151,8 @@ class BuildExperienceCard extends StatelessWidget {
                     ),
                     AutoSizeText(
                       skills,
+                      maxFontSize: 30,
+                      minFontSize: 10,
                       style: design.labelM().copyWith(
                             fontSize: getFontSize(
                               screenSize.width < 800 ? 0.03 : 0.015,

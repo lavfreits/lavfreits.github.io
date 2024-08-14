@@ -28,7 +28,9 @@ class HeaderSection extends StatelessWidget {
           height: screenSize.height,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('background-1.jpg'),
+              image: NetworkImage(
+                'https://raw.githubusercontent.com/lavfreits/lavfreits.github.io/master/assets/background-1.jpg',
+              ),
               fit: BoxFit.cover,
             ),
           ),
@@ -80,6 +82,7 @@ class HeaderSection extends StatelessWidget {
                 children: <Widget>[
                   AutoSizeText(
                     i18n.nameIntroduction,
+                    maxFontSize: 96,
                     style: design
                         .h1()
                         .copyWith(fontSize: getFontSize(0.06, screenSize))
@@ -88,6 +91,7 @@ class HeaderSection extends StatelessWidget {
                   const SizedBox(height: 10),
                   AutoSizeText(
                     i18n.introduction,
+                    maxFontSize: 50,
                     style: design
                         .h3()
                         .copyWith(fontSize: getFontSize(0.035, screenSize))
