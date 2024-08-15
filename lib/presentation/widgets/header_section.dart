@@ -55,21 +55,24 @@ class HeaderSection extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.all(18),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    BuildLanguageTool(
-                      onTap: onChangeLanguage,
-                      i18n: i18n,
-                    ),
-                    const SizedBox(width: 35),
-                    IconButton(
-                      icon: Icon(Icons.menu, size: 40, color: design.white),
-                      onPressed: () => Scaffold.of(context).openEndDrawer(),
-                    ),
-                  ],
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      BuildLanguageTool(
+                        onTap: onChangeLanguage,
+                        i18n: i18n,
+                      ),
+                      const SizedBox(width: 35),
+                      IconButton(
+                        icon: Icon(Icons.menu, size: 40, color: design.white),
+                        onPressed: () => Scaffold.of(context).openEndDrawer(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
+        print("Screen width: ${screenSize.width}");
         return Scaffold(
           key: _scaffoldKey,
           backgroundColor: design.secondary500,
@@ -239,16 +240,21 @@ class _HomePageState extends State<HomePage> {
                           crossAxisSpacing: 30,
                           childAspectRatio: screenSize.width < 850
                               ? screenSize.width < 500
-                                  ? 1.1
+                                  ? screenSize.width <= 400
+                                      ? 0.7
+                                      : 1.1
                                   : 1.2
                               : screenSize.width > 1030
                                   ? 1
                                   : 0.8,
                         ),
                         itemBuilder: (context, index) {
-                          return ProjectCard(
-                            project: i18n.projects[index],
-                            locale: locale,
+                          return FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: ProjectCard(
+                              project: i18n.projects[index],
+                              locale: locale,
+                            ),
                           );
                         },
                         itemCount: i18n.projects.length,

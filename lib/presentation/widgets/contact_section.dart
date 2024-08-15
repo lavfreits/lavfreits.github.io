@@ -27,8 +27,8 @@ class ContactSection extends StatelessWidget {
       children: [
         Container(
           height: screenSize.width < 600
-              ? 0.45 * screenSize.height
-              : 0.52 * screenSize.height,
+              ? 0.47 * screenSize.height
+              : 0.59 * screenSize.height,
           color: design.terciary500,
         ),
         Padding(
@@ -44,6 +44,7 @@ class ContactSection extends StatelessWidget {
               AutoSizeText(
                 i18n.contactMeDesc,
                 maxFontSize: 40,
+                minFontSize: 13,
                 style: design.h3().copyWith(
                       fontSize: screenSize.width > 1200
                           ? 0.018 * screenSize.width
@@ -71,7 +72,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             locale == 'pt-br' ? 'Currículo' : 'Resume/CV',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         SizedBox(height: 0.015 * screenSize.height),
@@ -85,7 +88,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Email',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         SizedBox(height: 0.015 * screenSize.height),
@@ -100,7 +105,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Linkedin',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         SizedBox(height: 0.015 * screenSize.height),
@@ -114,7 +121,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Github',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                       ],
@@ -133,7 +142,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             locale == 'pt-br' ? 'Currículo' : 'Resume',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         TextButton.icon(
@@ -146,7 +157,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Email',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         TextButton.icon(
@@ -160,7 +173,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Linkedin',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                         TextButton.icon(
@@ -173,7 +188,9 @@ class ContactSection extends StatelessWidget {
                           },
                           label: Text(
                             'Github',
-                            style: design.paragraphS(),
+                            style: design.paragraphS().copyWith(
+                                  fontSize: screenSize.width < 600 ? 15 : null,
+                                ),
                           ),
                         ),
                       ],

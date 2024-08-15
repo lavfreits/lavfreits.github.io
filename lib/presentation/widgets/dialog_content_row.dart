@@ -42,17 +42,18 @@ class DialogContentRow extends StatelessWidget {
               AutoSizeText(
                 project.detailedDescription,
                 maxFontSize: 30,
-                minFontSize: 10,
+                minFontSize: 12,
                 style: design.paragraphS().copyWith(
-                    fontSize: screenSize.width > 600
-                        ? 0.018 * screenSize.width
-                        : 0.022 * screenSize.width),
+                      fontSize: screenSize.width > 600
+                          ? 0.018 * screenSize.width
+                          : 0.022 * screenSize.width,
+                    ),
               ),
               SizedBox(height: 0.1 * screenSize.height),
               AutoSizeText(
                 project.technologies.join(", "),
                 maxFontSize: 30,
-                minFontSize: 10,
+                minFontSize: 12,
                 style: design.labelS().copyWith(
                       fontSize: screenSize.width > 600
                           ? 0.017 * screenSize.width

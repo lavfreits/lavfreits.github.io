@@ -27,55 +27,15 @@ class ProjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showDialog(
-          context: context,
-          builder: (_) {
-            return AlertDialog(
-              titlePadding: const EdgeInsets.all(22),
-              scrollable: true,
-              backgroundColor: design.terciary500,
-              title: AutoSizeText(
-                project.title,
-                maxFontSize: 40,
-                style: design.h3(),
-              ),
-              content: project.isWeb
-                  ? DialogContentColumn(project: project)
-                  : screenSize.width < 850
-                      ? DialogContentColumn(project: project)
-                      : DialogContentRow(project: project),
-              actions: [
-                TextButton.icon(
-                  icon: const FaIcon(
-                    FontAwesomeIcons.code,
-                    size: 16,
-                  ),
-                  onPressed: () {
-                    launchURL(project.repoUrl);
-                  },
-                  label: const Text(
-                    'Ver Código',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Fechar',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        );
+            context: context,
+            builder: (_) {
+              return MoreDetailsDialog(
+                project: project,
+                locale: locale,
+                design: design,
+                screenSize: screenSize,
+              );
+            });
       },
       child: Card(
         color: design.terciary500,
@@ -85,7 +45,7 @@ class ProjectCard extends StatelessWidget {
                 ? 0.018 * screenSize.width
                 : 0.025 * screenSize.width,
           ),
-          child: !project.isWeb
+          child: !project.isWeb && !(screenSize.width <= 400)
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -102,6 +62,19 @@ class ProjectCard extends StatelessWidget {
                     ProjectCardList(
                       project: project,
                       locale: locale,
+                      openProjectDetails: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return MoreDetailsDialog(
+                              project: project,
+                              locale: locale,
+                              design: design,
+                              screenSize: screenSize,
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 )
@@ -118,11 +91,88 @@ class ProjectCard extends StatelessWidget {
                     ProjectCardList(
                       project: project,
                       locale: locale,
+                      openProjectDetails: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return MoreDetailsDialog(
+                              project: project,
+                              locale: locale,
+                              design: design,
+                              screenSize: screenSize,
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),
         ),
       ),
+    );
+  }
+}
+
+class MoreDetailsDialog extends StatelessWidget {
+  final Project project;
+  final String locale;
+  final Design design;
+  final Size screenSize;
+
+  const MoreDetailsDialog({
+    super.key,
+    required this.project,
+    required this.locale,
+    required this.design,
+    required this.screenSize,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      titlePadding: const EdgeInsets.all(22),
+      scrollable: true,
+      backgroundColor: design.terciary500,
+      title: AutoSizeText(
+        project.title,
+        maxFontSize: 40,
+        style: design.h3(),
+      ),
+      content: project.isWeb
+          ? DialogContentColumn(project: project)
+          : screenSize.width < 850
+              ? DialogContentColumn(project: project)
+              : DialogContentRow(project: project),
+      actions: [
+        TextButton.icon(
+          icon: const FaIcon(
+            FontAwesomeIcons.code,
+            size: 16,
+          ),
+          onPressed: () {
+            launchURL(project.repoUrl);
+          },
+          label: const Text(
+            'Ver Código',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text(
+            'Fechar',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

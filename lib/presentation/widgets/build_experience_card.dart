@@ -59,43 +59,51 @@ class BuildExperienceCard extends StatelessWidget {
                       : 0.015 * screenSize.width,
                 ),
                 height: screenSize.width < 800
-                    ? 0.1 * screenSize.width
+                    ? screenSize.width <= 400
+                        ? 0.2 * screenSize.width
+                        : 0.1 * screenSize.width
                     : 0.05 * screenSize.width,
                 width: screenSize.width * 0.85,
                 decoration: BoxDecoration(
                   color: design.primary300,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        AutoSizeText(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: screenSize.width * 0.75,
+                        child: AutoSizeText(
                           title,
+                          overflow: TextOverflow.fade,
                           maxFontSize: 35,
                           style: design.h3().copyWith(
                                 fontSize: getFontSize(
-                                    screenSize.width < 800 ? 0.04 : 0.035),
+                                  screenSize.width < 800 ? 0.04 : 0.035,
+                                ),
                               ),
                         ),
-                        const SizedBox(width: 20),
-                        if (screenSize.width > 550)
-                          AutoSizeText(
-                            date,
-                            maxFontSize: 25,
-                            style: design.paragraphS().copyWith(
-                                  fontSize: getFontSize(0.02),
-                                ),
-                          ),
+                      ),
+                      if (screenSize.width > 550) ...[
+                        AutoSizeText(
+                          date,
+                          overflow: TextOverflow.fade,
+                          maxFontSize: 25,
+                          style: design.paragraphS().copyWith(
+                                fontSize: getFontSize(0.02),
+                              ),
+                        ),
+                        SizedBox(width: getFontSize(0.015)),
                       ],
-                    ),
-                    Icon(
-                      Icons.remove,
-                      size: getFontSize(0.013),
-                      color: Colors.white,
-                    ),
-                  ],
+                      Icon(
+                        Icons.remove,
+                        size: getFontSize(0.013),
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -142,7 +150,7 @@ class BuildExperienceCard extends StatelessWidget {
                     AutoSizeText(
                       description,
                       maxFontSize: 30,
-                      minFontSize: 10,
+                      minFontSize: 12,
                       style: design.paragraphS().copyWith(
                             fontSize: getFontSize(
                               screenSize.width < 800 ? 0.025 : 0.015,
@@ -152,7 +160,7 @@ class BuildExperienceCard extends StatelessWidget {
                     AutoSizeText(
                       skills,
                       maxFontSize: 30,
-                      minFontSize: 10,
+                      minFontSize: 11,
                       style: design.labelM().copyWith(
                             fontSize: getFontSize(
                               screenSize.width < 800 ? 0.03 : 0.015,

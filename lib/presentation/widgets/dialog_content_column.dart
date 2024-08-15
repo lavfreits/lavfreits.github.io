@@ -45,7 +45,7 @@ class DialogContentColumn extends StatelessWidget {
             children: [
               AutoSizeText(
                 project.detailedDescription,
-                minFontSize: 10,
+                minFontSize: 12,
                 maxFontSize: 30,
                 style: design.paragraphS().copyWith(
                     fontSize: screenSize.width > 600
@@ -55,7 +55,7 @@ class DialogContentColumn extends StatelessWidget {
               SizedBox(height: 0.05 * screenSize.height),
               AutoSizeText(
                 project.technologies.join(", "),
-                minFontSize: 10,
+                minFontSize: 12,
                 maxFontSize: 30,
                 style: design.labelM().copyWith(
                       fontSize: screenSize.width > 600
