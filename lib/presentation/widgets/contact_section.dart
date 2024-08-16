@@ -49,7 +49,7 @@ class ContactSection extends StatelessWidget {
                 style: design.h3().copyWith(
                       fontSize: screenSize.width > 1200
                           ? 0.018 * screenSize.width
-                          : 0.028 * screenSize.width,
+                          : 0.025 * screenSize.width,
                       height: 1.7,
                     ),
               ),
