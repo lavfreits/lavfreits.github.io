@@ -9,7 +9,7 @@ import '../../utils.dart';
 class ProjectCardList extends StatelessWidget {
   final Project project;
   final String locale;
-  final Function openProjectDetails;
+  final VoidCallback openProjectDetails;
 
   const ProjectCardList({
     super.key,
@@ -102,7 +102,7 @@ class ProjectCardList extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => openProjectDetails,
+                  onPressed: openProjectDetails,
                   child: Text(
                     locale == "en" ? 'More details' : 'Ver mais',
                     softWrap: true,
