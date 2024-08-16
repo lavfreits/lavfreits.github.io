@@ -55,6 +55,7 @@ class ProjectCardList extends StatelessWidget {
           Text(
             project.shortDescription,
             softWrap: true,
+            maxLines: 6,
             style: design.paragraphS().copyWith(
                   fontSize: screenSize.width > 800 ? 16 : 14,
                 ),
@@ -67,6 +68,7 @@ class ProjectCardList extends StatelessWidget {
           Text(
             project.technologies.join(", "),
             softWrap: true,
+            maxLines: 3,
             style: design.labelM().copyWith(
                   fontSize: screenSize.width < 800 ? 13 : 15,
                 ),
