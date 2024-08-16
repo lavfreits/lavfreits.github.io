@@ -27,15 +27,16 @@ class ProjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         showDialog(
-            context: context,
-            builder: (_) {
-              return MoreDetailsDialog(
-                project: project,
-                locale: locale,
-                design: design,
-                screenSize: screenSize,
-              );
-            });
+          context: context,
+          builder: (_) {
+            return MoreDetailsDialog(
+              project: project,
+              locale: locale,
+              design: design,
+              screenSize: screenSize,
+            );
+          },
+        );
       },
       child: Card(
         color: design.terciary500,
@@ -45,7 +46,7 @@ class ProjectCard extends StatelessWidget {
                 ? 0.018 * screenSize.width
                 : 0.025 * screenSize.width,
           ),
-          child: !project.isWeb && !(screenSize.width <= 400)
+          child: !project.isWeb && screenSize.width > 400
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -58,7 +59,7 @@ class ProjectCard extends StatelessWidget {
                     SizedBox(
                         width: screenSize.width > 850
                             ? 0.025 * screenSize.height
-                            : 0.03 * screenSize.height),
+                            : 0.02 * screenSize.height),
                     ProjectCardList(
                       project: project,
                       locale: locale,
@@ -83,9 +84,14 @@ class ProjectCard extends StatelessWidget {
                   children: [
                     Image.network(
                       project.imageUrl,
-                      height: screenSize.width > 850 && project.isWeb
+                      height: screenSize.width > 850
                           ? 0.13 * screenSize.width
-                          : 0.3 * screenSize.width,
+                          : null,
+                      width: screenSize.width < 850 && project.isWeb
+                          ? 0.45 * screenSize.width
+                          : screenSize.width > 900 && project.isWeb
+                              ? 0.55 * screenSize.width
+                              : 0.4 * screenSize.width,
                     ),
                     SizedBox(height: 0.02 * screenSize.height),
                     ProjectCardList(
@@ -135,7 +141,7 @@ class MoreDetailsDialog extends StatelessWidget {
       backgroundColor: design.terciary500,
       title: AutoSizeText(
         project.title,
-        maxFontSize: 40,
+        maxFontSize: 35,
         style: design.h3(),
       ),
       content: project.isWeb

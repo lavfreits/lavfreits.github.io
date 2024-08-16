@@ -241,7 +241,9 @@ class _HomePageState extends State<HomePage> {
                           childAspectRatio: screenSize.width < 850
                               ? screenSize.width < 500
                                   ? screenSize.width <= 400
-                                      ? 0.7
+                                      ? screenSize.width <= 300
+                                          ? 0.4
+                                          : 0.5
                                       : 1.1
                                   : 1.2
                               : screenSize.width > 1030
@@ -249,12 +251,9 @@ class _HomePageState extends State<HomePage> {
                                   : 0.8,
                         ),
                         itemBuilder: (context, index) {
-                          return FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: ProjectCard(
-                              project: i18n.projects[index],
-                              locale: locale,
-                            ),
+                          return ProjectCard(
+                            project: i18n.projects[index],
+                            locale: locale,
                           );
                         },
                         itemCount: i18n.projects.length,

@@ -40,31 +40,34 @@ class DialogContentColumn extends StatelessWidget {
         SizedBox(height: 0.04 * screenSize.height),
         SizedBox(
           width: 0.55 * screenSize.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AutoSizeText(
-                project.detailedDescription,
-                minFontSize: 12,
-                maxFontSize: 30,
-                style: design.paragraphS().copyWith(
-                    fontSize: screenSize.width > 600
-                        ? 0.018 * screenSize.width
-                        : 0.022 * screenSize.width),
-              ),
-              SizedBox(height: 0.05 * screenSize.height),
-              AutoSizeText(
-                project.technologies.join(", "),
-                minFontSize: 12,
-                maxFontSize: 30,
-                style: design.labelM().copyWith(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  project.detailedDescription,
+                  minFontSize: 12,
+                  maxFontSize: 30,
+                  style: design.paragraphS().copyWith(
                       fontSize: screenSize.width > 600
-                          ? 0.017 * screenSize.width
-                          : 0.023 * screenSize.width,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
+                          ? 0.018 * screenSize.width
+                          : 0.022 * screenSize.width),
+                ),
+                SizedBox(height: 0.05 * screenSize.height),
+                AutoSizeText(
+                  project.technologies.join(", "),
+                  minFontSize: 12,
+                  maxFontSize: 30,
+                  style: design.labelM().copyWith(
+                        fontSize: screenSize.width > 600
+                            ? 0.017 * screenSize.width
+                            : 0.023 * screenSize.width,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ],

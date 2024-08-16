@@ -68,7 +68,7 @@ class ContactSection extends StatelessWidget {
                           ),
                           onPressed: () {
                             launchURL(
-                                "https://docs.google.com/document/d/11dns9jkwr_1IzTt7nw-35F6trrQoT7L25ZeVnac6uqo/edit?usp=sharing");
+                                "https://docs.google.com/document/d/19lLYdqHuioaspoebxkDcbaJCuRLmTyxXr6dZmlHkWho/edit?usp=sharing");
                           },
                           label: Text(
                             locale == 'pt-br' ? 'Currículo' : 'Resume/CV',
@@ -138,10 +138,10 @@ class ContactSection extends StatelessWidget {
                           ),
                           onPressed: () {
                             launchURL(
-                                "https://docs.google.com/document/d/11dns9jkwr_1IzTt7nw-35F6trrQoT7L25ZeVnac6uqo/edit?usp=sharing");
+                                "https://docs.google.com/document/d/19lLYdqHuioaspoebxkDcbaJCuRLmTyxXr6dZmlHkWho/edit?usp=sharing");
                           },
                           label: Text(
-                            locale == 'pt-br' ? 'Currículo' : 'Resume',
+                            locale == 'pt-br' ? 'Currículo' : 'Resume/CV',
                             style: design.paragraphS().copyWith(
                                   fontSize: screenSize.width < 600 ? 15 : null,
                                 ),
