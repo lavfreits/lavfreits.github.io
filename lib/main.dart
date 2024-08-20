@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     return DesignSystem(
       playBankDesign: design,
       child: MaterialApp(
-        title: 'portifolio',
+        title: 'Portifólio - Lavínia',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: design.primary300,
