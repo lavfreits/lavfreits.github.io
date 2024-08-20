@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portifolio/container/bloc_container.dart';
+import 'package:portifolio/presentation/widgets/indexed_sliver_child_builder_delegate.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../design_system.dart';
@@ -39,8 +40,7 @@ class _HomePageState extends State<HomePage> {
     _localizationFuture = _localizationService.fetchLocalizationData(locale);
 
     controller = AutoScrollController(
-      viewportBoundaryGetter: () =>
-          Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      viewportBoundaryGetter: () => Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
       axis: Axis.vertical,
     );
   }
@@ -59,13 +59,13 @@ class _HomePageState extends State<HomePage> {
         scrollTo(1);
         break;
       case "work" || "trabalho":
-        scrollTo(2);
+        scrollTo(6);
         break;
       case "experience" || "experiência":
-        scrollTo(3);
+        scrollTo(12);
         break;
       case "contact" || "contato":
-        scrollTo(4);
+        scrollTo(17);
         break;
     }
   }
@@ -92,8 +92,7 @@ class _HomePageState extends State<HomePage> {
           endDrawer: FutureBuilder<Localization>(
             future: _localizationFuture,
             builder: (context, localizationSnapshot) {
-              if (localizationSnapshot.connectionState ==
-                  ConnectionState.waiting) {
+              if (localizationSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -120,8 +119,7 @@ class _HomePageState extends State<HomePage> {
           body: FutureBuilder<Localization>(
             future: _localizationFuture,
             builder: (context, localizationSnapshot) {
-              if (localizationSnapshot.connectionState ==
-                  ConnectionState.waiting) {
+              if (localizationSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -168,46 +166,38 @@ class _HomePageState extends State<HomePage> {
 
               return CustomScrollView(
                 controller: controller,
-                shrinkWrap: true,
                 slivers: [
-                  SliverList.list(
+                  IndexedSliverChildBuilderDelegate(
+                    controller: controller,
                     children: [
                       HeaderSection(
                         i18n: i18n,
                         onChangeLanguage: _updateLocalization,
                       ),
                       SizedBox(height: screenSize.height * 0.1),
-                      _wrapScrollTag(
-                        child: SectionTitle(
-                          screenSize: screenSize,
-                          title: i18n.expertise,
-                          style: design.h2(),
-                        ),
-                        index: 1,
+                      SectionTitle(
+                        screenSize: screenSize,
+                        title: i18n.expertise,
+                        style: design.h2(),
                       ),
                       SizedBox(height: screenSize.height * 0.1),
                       Padding(
                         padding: getPadding(0.1 * screenSize.width, 0),
                         child: screenSize.width < 800
                             ? Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: expertiseList,
                               )
                             : Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: expertiseList,
                               ),
                       ),
                       SizedBox(height: screenSize.height * 0.1),
-                      _wrapScrollTag(
-                        index: 2,
-                        child: SectionTitle(
-                          screenSize: screenSize,
-                          title: i18n.myWork,
-                          style: design.h1(),
-                        ),
+                      SectionTitle(
+                        screenSize: screenSize,
+                        title: i18n.myWork,
+                        style: design.h1(),
                       ),
                       SizedBox(height: 0.1 * screenSize.height),
                       Padding(
@@ -219,18 +209,14 @@ class _HomePageState extends State<HomePage> {
                           minFontSize: 10,
                           maxFontSize: 30,
                           style: design.paragraphS().copyWith(
-                                fontSize: screenSize.width < 800
-                                    ? 0.035 * screenSize.width
-                                    : 0.02 * screenSize.width,
+                                fontSize: screenSize.width < 800 ? 0.035 * screenSize.width : 0.02 * screenSize.width,
                               ),
                         ),
                       ),
                       SizedBox(height: 0.1 * screenSize.height),
                       GridView.builder(
                         padding: EdgeInsets.symmetric(
-                          horizontal: screenSize.width > 1100
-                              ? 0.1 * screenSize.width
-                              : 0.05 * screenSize.width,
+                          horizontal: screenSize.width > 1100 ? 0.1 * screenSize.width : 0.05 * screenSize.width,
                         ),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -259,13 +245,10 @@ class _HomePageState extends State<HomePage> {
                         itemCount: i18n.projects.length,
                       ),
                       SizedBox(height: 0.1 * screenSize.height),
-                      _wrapScrollTag(
-                        index: 3,
-                        child: SectionTitle(
-                          screenSize: screenSize,
-                          title: i18n.professionalExperience,
-                          style: design.h1(),
-                        ),
+                      SectionTitle(
+                        screenSize: screenSize,
+                        title: i18n.professionalExperience,
+                        style: design.h1(),
                       ),
                       SizedBox(height: 0.1 * screenSize.height),
                       BuildExperienceCard(
@@ -289,12 +272,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       SizedBox(height: screenSize.height * 0.1),
-                      _wrapScrollTag(
-                        index: 4,
-                        child: ContactSection(
-                          i18n: i18n,
-                          locale: locale,
-                        ),
+                      ContactSection(
+                        i18n: i18n,
+                        locale: locale,
                       ),
                     ],
                   ),
@@ -306,15 +286,4 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-
-  Widget _wrapScrollTag({
-    required int index,
-    required Widget child,
-  }) =>
-      AutoScrollTag(
-        key: ValueKey(index),
-        controller: controller,
-        index: index,
-        child: child,
-      );
 }
