@@ -84,23 +84,30 @@ class ProjectCardList extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                TextButton.icon(
-                  icon: const FaIcon(
-                    FontAwesomeIcons.code,
-                    size: 18,
-                  ),
-                  onPressed: () {
-                    launchURL(project.repoUrl);
-                  },
-                  label: Text(
-                    locale == "en" ? 'View Code' : 'Ver Código',
-                    softWrap: true,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                if (project.title != "Macaw Store")
+                  TextButton.icon(
+                    icon: const FaIcon(
+                      FontAwesomeIcons.code,
+                      size: 18,
+                    ),
+                    onPressed: () {
+                      launchURL(project.repoUrl);
+                    },
+                    label: Text(
+                      project.title == "Educaler"
+                          ? locale == "en"
+                              ? "App"
+                              : "Ver App"
+                          : locale == "en"
+                              ? 'Code'
+                              : 'Ver Código',
+                      softWrap: true,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-                ),
                 TextButton(
                   onPressed: openProjectDetails,
                   child: Text(
